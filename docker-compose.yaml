@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+  server:
+    image: "fridgeimage"
+    # network_mode: host
+    volumes:
+      - ./instruments:/app
+      - /dev:/dev
+      - ./drivers:/drivers
+    ports:
+      - "80:80"
+    #restart: always
+    tty: true
+    command: ["/bin/sh"]
+    privileged: true
+    stdin_open: true
