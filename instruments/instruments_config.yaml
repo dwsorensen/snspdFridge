@@ -134,3 +134,7 @@ inst: MCUSB3112
 name: compvsrc
 type: vsrc
 intf: mccusb
+thresh1: 3 #Channels hooked up to each comparator port
+thresh2: 4
+hyst1: 2
+hyst2: 6

@@ -47,7 +47,20 @@ def load_instr(yamlfile = "instruments_config.yaml"):
         instr[k]["dev"] = make_instance(instr[k], devModules[instkey])
     return instr
 
+def load_detectors(yamlfile = "detectors_config.yaml"):
+    fp = open(yamlfile, "r")
+    detector_gen = yaml.load_all(fp,Loader=yaml.Loader)
+    detectors = {}
+    for g in detector_gen:
+        print(g)
+        g["biasV"] = (g["iBias"] * 10**-6) * (g["rSeries"] * 1000)
+        print("Loaded detector #" + str(g["id"]))
+        print("Bias voltage: " + str(g["biasV"]))
+        detectors[g["id"]] = g
+    return detectors
+    
 instr = load_instr()
+detectors = load_detectors()
 laser = instr['laser2']['dev']
 #pc = instr['pc']['dev']
 pm1 = instr['pm1']['dev']
@@ -66,6 +79,44 @@ compvsrc = instr['compvsrc']['dev']
 
 attlist = [att1,att2,att3]
 
+def init_detector(detector):
+    biasVoltage = detector["biasV"]
+    biasChannel = detector["biasChannel"]
+    compChannel = detector["compChannel"]
+    threshVoltage = detector["compThreshold"]
+    hystVoltage = detector["compHyst"]
+
+    threshKey = "thresh" + str(compChannel)
+    hystKey = "hyst" + str(compChannel)
+
+    threshChannel = instr['compvsrc'][threshKey]
+    hystChannel = instr['compvsrc'][hystKey]
+
+    compvsrc.set_volt(threshChannel,threshVoltage)
+    compvsrc.set_volt(hystChannel,hystVoltage)
+
+    vsrc.set_volt(biasChannel,biasVoltage)
+
+
+def init_detectors():
+    print(detectors)
+    for detector in detectors:
+        init_detector(detectors[detector])
+
+def close_detector(detector):
+    biasChannel = detector["biasChannel"]
+    compChannel = detector["compChannel"]
+    threshKey = "thresh" + str(compChannel)
+    hystKey = "hyst" + str(compChannel)
+    threshChannel = instr['compvsrc'][threshKey]
+    hystChannel = instr['compvsrc'][hystKey]
+    compvsrc.set_volt(threshChannel,0)
+    compvsrc.set_volt(hystChannel,0)
+    vsrc.set_volt(biasChannel,0)
+
+def close_detectors():
+    for detector in detectors:
+        close_detector(detectors[detector])
 def att_enable():
     for att in attlist:
         att.enable()

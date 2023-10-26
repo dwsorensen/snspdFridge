@@ -5,8 +5,10 @@ biasChannel: 1 #Channel from ls vsrc (starts at 0)
 smaPort: 10 #Sma port
 ttChannel: 1 #Channel on timetagger
 compChannel: 2 #Channel on comparator (1 = A 2 = B)
-iBias: 4 #Bias current (microamps)
+iBias: 4.4 #Bias current (microamps)
 rSeries: 100 #resistance of series resistor (kohm)
+compThreshold: 0.7 #Threshold voltage for comparator
+compHyst: 4 #Hysteresis voltage for comparator
 ---
 id: 284 
 biasChannel: 0
@@ -15,3 +17,5 @@ ttChannel: 2
 compChannel: 1
 iBias: 5.5
 rSeries: 200
+compThreshold: 0.7
+compHyst: 4

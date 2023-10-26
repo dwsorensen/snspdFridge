@@ -1,5 +1,4 @@
 PyYAML
-serial
 numpy
 PySerial
 PyVisa
@@ -7,3 +6,4 @@ pyvisa-py
 uldaq
 ipython
 pyzmq
+future

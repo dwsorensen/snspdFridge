@@ -1,7 +1,6 @@
 import zmq
 import threading
 import instruments
-import daniel_utilities as dan
 
 class Server():
     def __init__(self, port, n_workers=4):
@@ -49,10 +48,10 @@ class Server():
             message = message.lower()
             message = message.split(" ")
             if message[0] == "initdetectors":
-                dan.initDetectors()
+                instruments.init_detectors()
                 returnMessage = "Detectors initialized."
             elif message[0] == "closedetectors":
-                dan.closeDetectors()
+                instruments.close_detectors()
                 returnMessage = "Detectors closed."
             elif message[0] == "bias":
                 if len(message) < 3:
@@ -60,23 +59,6 @@ class Server():
                 else:
                     instruments.vsrc.set_volt(int(message[1]),float(message[2]))
                     returnMessage = "Bias voltage set."
-            elif message[0] == "hyst":
-                if len(message) < 3:
-                    returnMessage = "2 Arguments Required."
-                else:
-                    channel = int(message[1])
-                    value = float(message[2])
-                    dan.setComp(channel,hysteresis=value)
-                    returnMessage = "Set comp " + str(channel) + " to " + str(value)
-            elif message[0] == "thresh":
-                if len(message) < 3:
-                    returnMessage = "2 Arguments Required."
-                else:
-                    channel = int(message[1])
-                    value = float(message[2])
-                    dan.setComp(channel,threshold = value)
-                    returnMessage = "Set comp " + str(channel) + " to " + str(value)
-                    
             elif message[0] == "laseron":
                 instruments.laseron()
                 returnMessage = "Laser turned on."
