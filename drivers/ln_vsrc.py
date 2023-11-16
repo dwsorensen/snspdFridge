@@ -2,9 +2,10 @@ import pyvisa as visa
 
 class dev(object):
     """Python class for SaeWoo's low-noise 4-port voltage source
-    written by Dileep V. Reddy"""
+    written by Dileep V. Reddy ported by Daniel W Sorensen"""
     def __init__(self, visa_name):
         self.rm = visa.ResourceManager()
+        self.visa_name = visa_name
         self.pyvisa = self.rm.open_resource(visa_name)
         self.pyvisa.timeout = 5000 # Set response timeout (in milliseconds)
         self.maxvolt = 2.5
@@ -20,12 +21,20 @@ class dev(object):
 
     def read(self):
         return self.pyvisa.read()
+        
+    def resetConnection(self):
+        self.pyvisa = self.rm.open_resource(self.visa_name)
+        self.pyvisa.timeout = 5000
 
     def write(self, string):
         self.pyvisa.write(string)
 
     def query(self, string):
-        return self.pyvisa.query(string)
+        try:
+          return self.pyvisa.query(string)
+        except visa.VisaIOError:
+          self.resetConnection()
+          return self.pyvisa.query(string)
 
     def close(self):
         self.pyvisa.close()

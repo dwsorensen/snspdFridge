@@ -13,4 +13,4 @@ services:
     tty: true
     privileged: true
     stdin_open: true
-    command: ["python3","instrument_server.py"]
+    command: ["/bin/sh"]
