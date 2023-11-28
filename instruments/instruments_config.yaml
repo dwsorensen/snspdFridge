@@ -126,7 +126,7 @@ inst: ln_vsrc
 name: vsrc
 type: vsrc
 intf: visa
-port: ASRL/dev/ttyACM1::INSTR
+port: ASRL/dev/ttyACM0::INSTR
 ---
 #---
 #Voltage source connected to comparators

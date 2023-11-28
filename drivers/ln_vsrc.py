@@ -53,7 +53,7 @@ class dev(object):
         self.val = volts
         if channel > 3:
             channel = 3
-        self.query('%s %s' % (channel, self.clamp(volts)))
+        print("Output: " + str(self.query('%s %s' % (channel, self.clamp(volts)))))
 
     def disable(self):
         for chan in range(0, 4):

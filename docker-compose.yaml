@@ -13,4 +13,17 @@ services:
     tty: true
     privileged: true
     stdin_open: true
-    command: ["/bin/sh"]
+    command: ["python3","instrument_server.py"]
+
+  tempControl:
+    image: "fridgeimage"
+    #network_mode: host
+    volumes:
+      - ./tempControl:/app
+      - /dev:/dev
+      - ./drivers:/drivers
+    restart: always
+    tty: true
+    privileged: true
+    stdin_open: true
+    command: ["python3","temp_server.py"]
