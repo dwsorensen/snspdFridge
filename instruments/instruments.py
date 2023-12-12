@@ -82,18 +82,18 @@ attlist = [att1,att2,att3]
 def init_detector(detector):
     biasVoltage = detector["biasV"]
     biasChannel = detector["biasChannel"]
-    compChannel = detector["compChannel"]
-    threshVoltage = detector["compThreshold"]
-    hystVoltage = detector["compHyst"]
+    #compChannel = detector["compChannel"]
+    #threshVoltage = detector["compThreshold"]
+    #hystVoltage = detector["compHyst"]
 
-    threshKey = "thresh" + str(compChannel)
-    hystKey = "hyst" + str(compChannel)
+    #threshKey = "thresh" + str(compChannel)
+    #hystKey = "hyst" + str(compChannel)
 
-    threshChannel = instr['compvsrc'][threshKey]
-    hystChannel = instr['compvsrc'][hystKey]
+    #threshChannel = instr['compvsrc'][threshKey]
+    #hystChannel = instr['compvsrc'][hystKey]
 
-    compvsrc.set_volt(threshChannel,threshVoltage)
-    compvsrc.set_volt(hystChannel,hystVoltage)
+    #compvsrc.set_volt(threshChannel,threshVoltage)
+    #compvsrc.set_volt(hystChannel,hystVoltage)
 
     vsrc.set_volt(biasChannel,biasVoltage)
 
@@ -105,13 +105,13 @@ def init_detectors():
 
 def close_detector(detector):
     biasChannel = detector["biasChannel"]
-    compChannel = detector["compChannel"]
-    threshKey = "thresh" + str(compChannel)
-    hystKey = "hyst" + str(compChannel)
-    threshChannel = instr['compvsrc'][threshKey]
-    hystChannel = instr['compvsrc'][hystKey]
-    compvsrc.set_volt(threshChannel,0)
-    compvsrc.set_volt(hystChannel,0)
+    #compChannel = detector["compChannel"]
+    #threshKey = "thresh" + str(compChannel)
+    #hystKey = "hyst" + str(compChannel)
+    #threshChannel = instr['compvsrc'][threshKey]
+    #hystChannel = instr['compvsrc'][hystKey]
+    #compvsrc.set_volt(threshChannel,0)
+    #compvsrc.set_volt(hystChannel,0)
     vsrc.set_volt(biasChannel,0)
 
 def close_detectors():

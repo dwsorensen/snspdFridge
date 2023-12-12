@@ -7,6 +7,8 @@ coolingTime = 8 #time(24hr value) to enter cooling
 def currentHour():
     currentHour_utc = time.localtime().tm_hour
     currentHour_mst = currentHour_utc - 7
+    if currentHour_mst < 1:
+        currentHour_mst = currentHour_mst + 24
     return currentHour_mst
 
 if __name__ == "__main__":
@@ -15,7 +17,7 @@ if __name__ == "__main__":
     while True:
         h = currentHour()
         m = ctc.getMode()
-        if h >= coolingTime and m != "cooling":
+        if h >= coolingTime and h < primingTime and m != "cooling":
             print("TEMPERATURE SERVER SETTING TO COOLING MODE")
             currentTime = time.localtime()
             formattedTime = time.strftime("%Y-%m-%d %H:%M:%S", currentTime)
@@ -27,4 +29,9 @@ if __name__ == "__main__":
             formattedTime = time.strftime("%Y-%m-%d %H:%M:%S", currentTime)
             print(formattedTime)
             ctc.primingMode()
-        time.sleep(120)
+        else:
+            print("TEMPERATURE SERVER REMAINING IN CURRENT STATE: " + m)
+            currentTime = time.localtime()
+            formattedTime = time.strftime("%Y-%m-%d %H:%M:%S", currentTime)
+            print(formattedTime)
+        time.sleep(300)

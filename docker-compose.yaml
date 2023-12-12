@@ -17,7 +17,7 @@ services:
 
   tempControl:
     image: "fridgeimage"
-    #network_mode: host
+    network_mode: host
     volumes:
       - ./tempControl:/app
       - /dev:/dev

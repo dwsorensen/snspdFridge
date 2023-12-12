@@ -1,6 +1,7 @@
 import zmq
 import threading
 import instruments
+import time
 
 class Server():
     def __init__(self, port, n_workers=4):
@@ -65,6 +66,10 @@ class Server():
             elif message[0] == "laseroff":
                 instruments.laseroff()
                 returnMessage = "Laser turned off."
+            elif message[0] == "reset":
+              instruments.close_detectors()
+              time.sleep(15)
+              instruments.init_detectors()
             elif message[0] == "att":
                 if len(message) < 2:
                     returnMessage = "1 Argument Required."
@@ -79,4 +84,6 @@ class Server():
         return returnMessage.encode()
 
 if __name__ == '__main__':
+    print("Instrument server initializing detectors")
+    instruments.init_detectors()
     zmqs = Server('80', n_workers=4)
