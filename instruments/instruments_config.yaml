@@ -126,15 +126,15 @@ inst: ln_vsrc
 name: vsrc
 type: vsrc
 intf: visa
-port: ASRL/dev/ttyACM0::INSTR
----
+port: ASRL/dev/ttyACM1::INSTR
+#---
 #---
 #Voltage source connected to comparators
-inst: MCUSB3112
-name: compvsrc
-type: vsrc
-intf: mccusb
-thresh1: 3 #Channels hooked up to each comparator port
-thresh2: 4
-hyst1: 2
-hyst2: 6
+#inst: MCUSB3112
+#name: compvsrc
+#type: vsrc
+#intf: mccusb
+#thresh1: 3 #Channels hooked up to each comparator port
+#thresh2: 4
+#hyst1: 2
+#hyst2: 6

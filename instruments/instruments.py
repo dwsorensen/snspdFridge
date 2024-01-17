@@ -74,7 +74,7 @@ att3 = instr['att3']['dev']
 dmm = instr['dmm']['dev']
 oldvsrc = instr['oldvsrc']['dev']
 vsrc = instr['vsrc']['dev']
-compvsrc = instr['compvsrc']['dev']
+#compvsrc = instr['compvsrc']['dev']
 #counter = instr['counter']['dev']
 
 attlist = [att1,att2,att3]
@@ -95,7 +95,9 @@ def init_detector(detector):
     #compvsrc.set_volt(threshChannel,threshVoltage)
     #compvsrc.set_volt(hystChannel,hystVoltage)
 
+    print("setting voltage")
     vsrc.set_volt(biasChannel,biasVoltage)
+    print("Done setting voltage.")
 
 
 def init_detectors():

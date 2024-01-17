@@ -13,7 +13,7 @@ import sys
 class CTC(object):
     # def __init__(self, port=0, baud_rate=9600, time_out=1):
     # def __init__(self, serialport='/dev/ttyACM0', baud_rate=9600, time_out=1):
-    def __init__(self, serialport='/dev/ttyACM1', baud_rate=9600, time_out=1):
+    def __init__(self, serialport='/dev/ttyACM0', baud_rate=9600, time_out=1):
         self.params = {}
         self.params["serialport"] = serialport
         self.params["baud_rate"] = baud_rate
