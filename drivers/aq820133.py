@@ -130,6 +130,7 @@ class dev(base_optical_attenuator.dev, aq8201.dev):
         self.set_slot()
         msg = self.meter.query("AW?\n")
         # print 'Msg from query',msg
+        msg = msg.decode()
         if len(msg) > 2:
             self.wl = float(msg.strip().split("AW")[1])
             return self.wl

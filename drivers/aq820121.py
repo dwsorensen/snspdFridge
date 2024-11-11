@@ -175,7 +175,7 @@ class dev(base_optical_power_meter.dev, aq8201.dev):
             msg = self.meter.query("PW?", wait=0.1, attempts=3)
             # if len(msg)==0:
             #    msg = self.meter.read()
-            msg = msg.strip()
+            msg = msg.strip().decode()
             if "," in msg:
                 print("bad msg from power meter", repr(msg))
                 msg = ""

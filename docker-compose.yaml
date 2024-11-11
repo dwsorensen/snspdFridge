@@ -1,23 +1,24 @@
 version: "3.3"
 services:
-  server:
+  instrumentServer:
     image: "fridgeimage"
     # network_mode: host
     volumes:
       - ./instruments:/app
       - /dev:/dev
       - ./drivers:/drivers
+      - ../sde_port:/app/sde_port
     ports:
       - "80:80"
     restart: always
     tty: true
     privileged: true
     stdin_open: true
+    #command: ["python3","instrument_server.py"]
     command: ["python3","instrument_server.py"]
 
   tempControl:
     image: "fridgeimage"
-    network_mode: host
     volumes:
       - ./tempControl:/app
       - /dev:/dev
@@ -26,4 +27,19 @@ services:
     tty: true
     privileged: true
     stdin_open: true
-    command: ["python3","temp_server.py"]
+    command: ["python3", "temp_server.py"]
+  
+  taggerHost:
+    image: taggerimage
+    # network_mode: host
+    volumes:
+      - ./taggerHost:/app
+    environment:
+      - PYTHONPATH=/usr/lib/python3/dist-packages/
+    ports:
+      - "5000:5000"
+    restart: always
+    tty: true
+    privileged: true
+    stdin_open: true
+    command: ["python3", "hostTagger.py"]

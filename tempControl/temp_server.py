@@ -1,8 +1,21 @@
 from CTC100 import CTC
 import time
 
-primingTime = 20 #time (24hr value) to enter priming. MST
+primingTime = 23 #time (24hr value) to enter priming. MST
 coolingTime = 8 #time(24hr value) to enter cooling
+
+def setState(s):
+	if s == 1:
+		print("Cooling:")
+		ctc = CTC()
+		ctc.coolingMode()
+	if s == 0:
+		print("Priming:")
+		ctc = CTC()
+		ctc.primingMode()
+	else:
+		print("Doing nothing :(")
+	print("Done")
 
 def currentHour():
     currentHour_utc = time.localtime().tm_hour
@@ -34,4 +47,4 @@ if __name__ == "__main__":
             currentTime = time.localtime()
             formattedTime = time.strftime("%Y-%m-%d %H:%M:%S", currentTime)
             print(formattedTime)
-        time.sleep(300)
+        time.sleep(600)

@@ -1,0 +1,140 @@
+---
+  # 1x12 switch. See aq820143.py in rack_ctrl
+addr: 6
+inst: aq820143
+intf: gpib
+name: sw12
+port: /dev/ttyUSB0
+slot: 1
+type: switch
+---
+  # 1500 nm - 1620 nm laser
+addr: 6
+inst: aq820113
+intf: gpib
+name: laser2
+port: /dev/ttyUSB0
+slot: 3
+type: laser
+---
+  # Attenuator 1
+addr: 6
+inst: aq820133
+intf: gpib
+name: att1
+port: /dev/ttyUSB0
+slot: 5
+type: att
+---
+  # 1460 nm - 1580 nm laser
+addr: 6
+inst: aq820113
+intf: gpib
+name: laser
+port: /dev/ttyUSB0
+slot: 6
+type: laser
+---
+  # Attenuator 2
+addr: 6
+inst: aq820133
+intf: gpib
+name: att2
+port: /dev/ttyUSB0
+slot: 7
+type: att
+---
+#  # Attenuator 3
+addr: 6
+inst: aq820133
+intf: gpib
+name: att3
+port: /dev/ttyUSB0
+slot: 8
+type: att
+---
+#  # Dual 2x2 switches
+addr: 6
+inst: aq8201422
+intf: gpib
+name: switch
+port: /dev/ttyUSB0
+slot: 9
+device_number: 2
+type: switch
+---
+  # Dual power meters: pm1
+addr: 6
+inst: aq820122
+intf: gpib
+name: pm1
+port: /dev/ttyUSB0
+slot: 10
+device_number: 1
+type: pm
+---
+  # Dual power meters: pm2
+addr: 6
+inst: aq820122
+intf: gpib
+name: pm2
+port: /dev/ttyUSB0
+slot: 10
+device_number: 2
+type: pm
+---
+  # Calibrated power meter
+addr: 20
+inst: ag81533a
+intf: gpib
+name: pmcal
+port: /dev/ttyUSB0
+slot: 1
+type: pm
+---
+#addr: 9
+#inst: Keithley213
+#intf: gpib
+#name: oldvsrc
+#port: /dev/ttyUSB0
+#slot: 1
+#type: vsrc
+#---
+addr: 8
+inst: Keithley199
+intf: gpib
+name: dmm
+port: /dev/ttyUSB0
+type: dmm
+---
+#addr: 23
+#inst: sr400
+#intf: gpib
+#name: counter
+#port: COM6
+#type: counter
+#---
+addr: 5
+inst: MPC01
+intf: gpib
+name: pc
+port: /dev/ttyUSB0
+type: pc
+---
+#Custom low noise voltage source
+inst: ln_vsrc
+name: vsrc
+type: vsrc
+intf: visa
+port: ASRL/dev/ttyACM1::INSTR
+# ---
+---
+#Voltage source connected to comparators
+ inst: MCUSB3112
+ name: compvsrc
+ type: vsrc
+ intf: mccusb
+ thresh1: 3 #Channels hooked up to each comparator port
+ thresh2: 4
+ hyst1: 2
+ hyst2: 6

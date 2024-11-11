@@ -104,7 +104,7 @@ class dev(base_laser.dev, aq8201.dev):
             self.wl = float("NaN")
             # print 'Trying to read again',repr(self.meter.read(100))
         else:
-            self.wl = float(msg.strip().lstrip("LW"))
+            self.wl = float(msg.strip().decode().lstrip("LW"))
         return self.wl
 
     def set_lambda(self, value):

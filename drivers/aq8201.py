@@ -56,6 +56,7 @@ class dev(object):
             self.meter.write("C%d" % self.slot)
             msgin = self.meter.query("C?", wait=0.01, attempts=1).strip()
             # print 'set_slot msgin:',repr(msgin)
+            msgin = msgin.decode()
             if "%02d" % self.slot == msgin.split("C")[-1]:
                 break
             else:

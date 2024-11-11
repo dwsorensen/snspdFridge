@@ -83,7 +83,7 @@ class Gpib(object):
         self.port.write(("++read eoi\n").encode())
         self.res = self.port.read(length)
         self.closent()
-        print("Recieved " + self.res)
+        print("Recieved " + self.res.decode())
         return self.res
 
     def readline(self):

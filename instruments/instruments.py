@@ -61,23 +61,23 @@ def load_detectors(yamlfile = "detectors_config.yaml"):
     
 instr = load_instr()
 detectors = load_detectors()
-laser = instr['laser2']['dev']
+#laser = instr['laser2']['dev']
 #pc = instr['pc']['dev']
-pm1 = instr['pm1']['dev']
-pm2 = instr['pm2']['dev']
+#pm1 = instr['pm1']['dev']
+#pm2 = instr['pm2']['dev']
 #pmcal = instr['pmcal']['dev']
-switch = instr['switch']['dev']
-sw12 = instr['sw12']['dev']
-att1 = instr['att1']['dev']
-att2 = instr['att2']['dev']
-att3 = instr['att3']['dev']
-dmm = instr['dmm']['dev']
-oldvsrc = instr['oldvsrc']['dev']
+#switch = instr['switch']['dev']
+#sw12 = instr['sw12']['dev']
+#att1 = instr['att1']['dev']
+#att2 = instr['att2']['dev']
+#att3 = instr['att3']['dev']
+#dmm = instr['dmm']['dev']
+#oldvsrc = instr['oldvsrc']['dev']
 vsrc = instr['vsrc']['dev']
-#compvsrc = instr['compvsrc']['dev']
+compvsrc = instr['compvsrc']['dev']
 #counter = instr['counter']['dev']
 
-attlist = [att1,att2,att3]
+#attlist = [att1,att2,att3]
 
 def init_detector(detector):
     biasVoltage = detector["biasV"]
@@ -130,6 +130,7 @@ def att_disable():
 def att_set(value):
     for att in attlist:
         att.set_att(value)
+        att.enable()
 
 def laseron():
     laser.enable()

@@ -2,6 +2,7 @@ import zmq
 import threading
 import instruments
 import time
+import json
 
 class Server():
     def __init__(self, port, n_workers=4):
@@ -54,29 +55,26 @@ class Server():
             elif message[0] == "closedetectors":
                 instruments.close_detectors()
                 returnMessage = "Detectors closed."
+            elif message[0] == "iddetectors":
+                detDict = instruments.detectors
+                returnMessage = json.dumps(detDict)
             elif message[0] == "bias":
                 if len(message) < 3:
                     returnMessage = "2 Arguments Required."
                 else:
                     instruments.vsrc.set_volt(int(message[1]),float(message[2]))
                     returnMessage = "Bias voltage set."
-            elif message[0] == "laseron":
-                instruments.laseron()
-                returnMessage = "Laser turned on."
-            elif message[0] == "laseroff":
-                instruments.laseroff()
-                returnMessage = "Laser turned off."
             elif message[0] == "reset":
               instruments.close_detectors()
               time.sleep(15)
               instruments.init_detectors()
-            elif message[0] == "att":
-                if len(message) < 2:
-                    returnMessage = "1 Argument Required."
-                else:
-                    value = float(message[1])
-                    instruments.att_set(value)
-                    returnMessage = "Set attenuators to " + str(value)
+            elif message[0] == "comp":
+                v = float(message[2])
+                #This is absolutely disgusting but I love it
+                channel = instruments.instr['compvsrc'][message[1]]
+                instruments.compvsrc.set_volt(channel,v)
+                returnMessage = "Comparator set"
+
             else:
                 returnMessage = "Command not recognized."
         except Exception as e:
@@ -84,6 +82,4 @@ class Server():
         return returnMessage.encode()
 
 if __name__ == '__main__':
-    print("Instrument server initializing detectors")
-    instruments.init_detectors()
     zmqs = Server('80', n_workers=4)

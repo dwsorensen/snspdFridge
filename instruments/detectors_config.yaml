@@ -1,16 +1,14 @@
 #This file should ONLY reflect detectors that are currently hooked up, characterized, and working.
 ---
 id: 2340 #Detector number
-biasChannel: 1 #Channel from ls vsrc (starts at 0)
-smaPort: 5 #Sma port
+biasChannel: 0 #Channel from ls vsrc (starts at 0)
 ttChannel: 1 #Channel on timetagger
 #compChannel: 2 #Channel on comparator (1 = A 2 = B)
 iBias: 10 #(microamps)
 rSeries: 100 #resistance of series resistor (kohm)
 ---
-id: 2336
-biasChannel: 0
-smaPort: 3
+id: 2348
+biasChannel: 1
 ttChannel: 2
 #compChannel: 1
 iBias: 13.5

@@ -26,7 +26,7 @@ class dev(object):
             print("Got empty string")
             msgout = "NaN"
         # return float(msgout)
-        x = float(msgout.strip("\r\n"))
+        x = float(msgout.decode().strip("\r\n"))
 
         return x
         # return map(float,msgout.split('\n')[1:2])[0]
